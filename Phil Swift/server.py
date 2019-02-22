@@ -16,6 +16,7 @@ description = 'Phil Swift here to tell you about Flex Tape!'
 startup_extensions = ['modules.Misc', #Default extensions (all enabled)
                       'modules.OWL',
                       'modules.Osu',
+                      'modules.FlexSeal',
                       #continued
                     ]
 
@@ -29,10 +30,7 @@ async def on_ready():
   print(bot.user.name)
   print(bot.user.id)
   print("**Date:** " + str(datetime.datetime.now()))
-  photo = open('assets/phil.jpg', 'rb')
-  foto = photo.read()
-  await bot.change_presence(activity=discord.Game(name='with Flex Tape'), avatar=foto)
-
+  await bot.change_presence(activity=discord.Game(name='with Flex Tape'))
   
 async def background_task():
     await bot.wait_until_ready()
@@ -63,4 +61,4 @@ if __name__ == '__main__':
     sys.stdout = logBuffer = io.StringIO()
     sys.stderr = errBuffer = io.StringIO()
     bot.loop.create_task(background_task())
-    bot.run('')
+    bot.run('key_here')

@@ -16,14 +16,6 @@ class FlexSeal():
         await ctx.send(quote.read())
         quote.close()
 
-#    @commands.command()
-#    async def flexseal(self, ctx):
-#        """Flex Seal the call!"""
-#        await ctx.send("Joining...")
-#        channel = ctx.author.voice.channel
-#        await channel.connect()
-
-
 #Not part of class:
 def setup(bot):
     bot.add_cog(FlexSeal(bot))
