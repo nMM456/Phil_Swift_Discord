@@ -71,7 +71,7 @@ class OWL():
                 formattedMes = formattedMes + y.capitalize() +": ``"+str(data["data"][x][y])+"``\n"
                 
         embed=discord.Embed(title="**"+niceName+"'s " + "Stats**", description=formattedMes)
-        embed.set_author(name="OWL", url="https://overwatchleague.com", icon_url="https://vignette.wikia.nocookie.net/overwatch/images/c/cc/Competitive_Grandmaster_Icon.png/revision/latest?cb=20161122023845")
+        embed.set_author(name="OWL", url="https://overwatchleague.com", icon_url="https://bnetcmsus-a.akamaihd.net/cms/page_media/JEUWQ6CN33BR1507857496436.svg")
         embed.set_footer(text="It's 3AM and Jake has a riptire in your room")
         await ctx.send(embed=embed)
       except:
@@ -127,10 +127,24 @@ class OWL():
       url = 'https://api.overwatchleague.com/rankings'
       url_get = requests.get(url)
       data = url_get.json()
-      message="OWL ranking by map differential:\n"
+      message="```OWL ranking by map differential:\n"
       for i in data["content"]:
         message+=str(i["placement"])+". "+i["competitor"]["name"]+": "+str(i["records"][0]["comparisons"][1]["value"])+"\n"
+      message+="```"
       await ctx.send(message)
+      
+    @commands.command()
+    async def teams(self, ctx):
+        """List all teams in the OWL"""
+        await ctx.send("Fetching data...")
+        url = 'https://api.overwatchleague.com/teams'
+        url_get = requests.get(url)
+        data = url_get.json()
+        message="```"
+        for teams in data["competitors"]:
+            message+= teams["competitor"]["name"]+"\n"
+        message+="```"
+        await ctx.send(message)
 
       
     
