@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import asyncio
 import re
+import requests
 
 class Misc():
     def __init__(self, bot):
@@ -79,6 +80,13 @@ class Misc():
     async def JAKE(self, ctx):
         """JAKE IS MAD BECAUSE HE IS BAD"""
         await ctx.send('J <:LUL:421063402094329858> K E')
+    @commands.command()
+    async def kanye(self, ctx):
+        """Thank you Kanye, very cool!"""
+        url = 'https://api.kanye.rest/'
+        url_get = requests.get(url)
+        data = url_get.json()
+        await ctx.send(data["quote"])
     
 #Not part of class:
 def setup(bot):
