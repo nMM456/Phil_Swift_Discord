@@ -4,7 +4,7 @@ import asyncio
 import re
 import requests
 
-class Misc():
+class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     #commands for this module go here, in this class

@@ -6,7 +6,7 @@ import time
 import urllib.request
 
 
-class OWL():
+class OWL(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     #commands for this module go here, in this class

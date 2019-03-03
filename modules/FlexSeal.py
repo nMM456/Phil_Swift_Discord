@@ -3,7 +3,7 @@ from discord.ext import commands
 import asyncio
 import urllib.request
 
-class FlexSeal():
+class FlexSeal(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     #commands for this module go here, in this class

@@ -17,6 +17,7 @@ startup_extensions = ['modules.Misc', #Default extensions (all enabled)
                       'modules.OWL',
                       'modules.Osu',
                       'modules.FlexSeal',
+                      'modules.Weather',
                       #continued
                     ]
 
