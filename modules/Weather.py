@@ -8,7 +8,7 @@ class Weather(commands.Cog):
         self.bot = bot
     #commands for this module go here, in this class
     @commands.command()
-    async def osustats(self, ctx, user):
+    async def alerts(self, ctx, user):
         """Get Alerts for the Worcester area."""
         url = 'https://api.weather.gov/alerts/active/zone/MAZ012'
         url_get = requests.get(url)
