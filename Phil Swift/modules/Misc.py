@@ -86,7 +86,7 @@ class Misc():
         url = 'https://api.kanye.rest/'
         url_get = requests.get(url)
         data = url_get.json()
-        await ctx.send(data["quote"])
+        await ctx.send('"'+data["quote"]+'"')
     
 #Not part of class:
 def setup(bot):
