@@ -8,14 +8,14 @@ class Weather(commands.Cog):
         self.bot = bot
     #commands for this module go here, in this class
     @commands.command()
-    async def alerts(self, ctx, user):
+    async def alerts(self, ctx):
         """Get Alerts for the Worcester area."""
         url = 'https://api.weather.gov/alerts/active/zone/MAZ012'
         url_get = requests.get(url)
         data = url_get.json()
-        message=data["features"][0]["properties"]["event"]+"\n"
-        message+=data["features"][0]["properties"]["headline"]+"\n"
-        message+=data["features"][0]["properties"]["description"]
+        message="```"+data["features"][0]["properties"]["event"]+"\n"+"\n"
+        message+=data["features"][0]["properties"]["headline"]+"\n"+"\n"
+        message+=data["features"][0]["properties"]["description"]+"```"
         await ctx.send(message)
 
 #Not part of class:
