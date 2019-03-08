@@ -11,7 +11,7 @@ Current general commands are:
   
   - osu! statistics
   
-  - US Weather support(I plan on adding on to this)
+  - US Weather support(I plan to add on to this)
   
   - Other useless basic commands that are to irrelevant to list off as of now.
 
