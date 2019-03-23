@@ -3,6 +3,7 @@ from discord.ext import commands
 import asyncio
 import re
 import requests
+import urllib.request
 
 class Misc(commands.Cog):
     def __init__(self, bot):
@@ -87,6 +88,9 @@ class Misc(commands.Cog):
         url_get = requests.get(url)
         data = url_get.json()
         await ctx.send('"'+data["quote"]+'"')
+    @commands.command()
+    async def getServerID(self, ctx):
+        ctx.send(ctx.guild.id)         
     
 #Not part of class:
 def setup(bot):

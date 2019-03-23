@@ -145,7 +145,19 @@ class OWL(commands.Cog):
             message+= teams["competitor"]["name"]+"\n"
         message+="```"
         await ctx.send(message)
-
+        
+    @commands.command()
+    async def CSV(self, ctx):
+        """Grab all the players stats and export them as a CSV"""
+        url = 'https://api.overwatchleague.com/stats/players'
+        url_get = requests.get(url)
+        data = url_get.json()
+        f = open("stats.csv", "w")
+        for x in data["data"]:
+            for i in x:
+                f.write(str(x[i])+", ")
+            f.write("\n")
+        await ctx.send(file=discord.File('stats.csv', filename='stats.csv'))
       
     
 #Not part of class:
