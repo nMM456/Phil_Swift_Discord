@@ -35,7 +35,11 @@ async def on_ready():
   
 async def background_task():
     await bot.wait_until_ready()
+    time = bot.get_channel(561686318501986314)
     while (not bot.is_closed()):
+        cd = datetime.datetime.now()
+        await time.edit(name=str(cd.strftime("%I:%M:%S %p")))
+        await asyncio.sleep(.9)
         global logBuffer
         global errBuffer
         toChannel=bot.get_channel(497193723621277751)
