@@ -4,6 +4,8 @@ import asyncio
 import sys
 import io
 import datetime
+import os
+import json
 
 def get_prefix(bot, message):
     '''A callable Prefix for our bot. This could be edited to allow per server prefixes.'''
@@ -32,14 +34,40 @@ async def on_ready():
   print(bot.user.id)
   print("**Date:** " + str(datetime.datetime.now()))
   await bot.change_presence(activity=discord.Game(name='with Flex Tape'))
+    
+@bot.event
+async def on_guild_join(guild):
+    dir = os.getcwd()+"/servers/"
+    os.mkdir(dir)
+    os.makedirs(dir+str(guild.id))
+    prefs = {}
+    prefs["prefix"] = "!"
+    f = open(dir+str(guild.id)+"/pref.json", "x")
+    pref = json.dumps(prefs)
+    f.write(pref)
+    for x in guild.members:
+        data = {}
+        data["name"] = x.name
+        data["id"] = x.id
+        user = json.dumps(data)
+        f = open(dir+str(guild.id)+"/"+str(x.id)+".json", "x")
+        f.write(user)
+        
+@bot.event()
+async def on_member_join(member):
+    data = {}
+    data["name"] = member.name
+    data["id"] = member.id
+    user = json.dumps(data)
+    f = open(dir+str(member.guild.id)+"/"+str(member.id)+".json", "x")
+    f.write(user)
   
 async def background_task():
     await bot.wait_until_ready()
     time = bot.get_channel(561686318501986314)
     while (not bot.is_closed()):
-        cd = datetime.datetime.now()
-        await time.edit(name=str(cd.strftime("%I:%M:%S %p")))
-        await asyncio.sleep(.9)
+        cd = datetime.datetime.now() - datetime.timedelta(hours=4)
+        await time.edit(name=cd.strftime("%I:%M:%S %p"))
         global logBuffer
         global errBuffer
         toChannel=bot.get_channel(497193723621277751)
@@ -54,7 +82,7 @@ async def background_task():
             await toChannel.send(toSend)
         if toSend2 != "":
             await toChannel.send(toSend2)
-        await asyncio.sleep(1)
+        await asyncio.sleep(.9)
 
 if __name__ == '__main__':
     for extension in startup_extensions:
@@ -66,4 +94,4 @@ if __name__ == '__main__':
     sys.stdout = logBuffer = io.StringIO()
     sys.stderr = errBuffer = io.StringIO()
     bot.loop.create_task(background_task())
-    bot.run('key_here')
+    bot.run('NDA5ODEwODk4NzAyNTY1Mzkx.DVkBuw.N7LNiA7TcAXFJDNrrxCWuVGSDvI')
