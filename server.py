@@ -6,6 +6,8 @@ import io
 import datetime
 import os
 import json
+import requests
+import time
 
 def get_prefix(bot, message):
     '''A callable Prefix for our bot. This could be edited to allow per server prefixes.'''
