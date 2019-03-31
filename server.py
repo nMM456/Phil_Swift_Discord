@@ -94,4 +94,4 @@ if __name__ == '__main__':
     sys.stdout = logBuffer = io.StringIO()
     sys.stderr = errBuffer = io.StringIO()
     bot.loop.create_task(background_task())
-    bot.run('NDA5ODEwODk4NzAyNTY1Mzkx.DVkBuw.N7LNiA7TcAXFJDNrrxCWuVGSDvI')
+    bot.run('key here')
