@@ -22,7 +22,7 @@ startup_extensions = ['modules.Misc', #Default extensions (all enabled)
                       'modules.Weather',
                       #continued
                     ]
-
+tokens = json.load(open("tokens.json"))
 bot = commands.Bot(command_prefix=get_prefix, description=description)
 bot.remove_command('help')
 
@@ -53,7 +53,7 @@ async def on_guild_join(guild):
         f = open(dir+str(guild.id)+"/"+str(x.id)+".json", "x")
         f.write(user)
         
-@bot.event()
+@bot.event
 async def on_member_join(member):
     data = {}
     data["name"] = member.name
@@ -94,4 +94,4 @@ if __name__ == '__main__':
     sys.stdout = logBuffer = io.StringIO()
     sys.stderr = errBuffer = io.StringIO()
     bot.loop.create_task(background_task())
-    bot.run('key here')
+    bot.run(tokens["discord"])

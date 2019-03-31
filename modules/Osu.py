@@ -11,7 +11,9 @@ class Osu(commands.Cog):
     @commands.command()
     async def osustats(self, ctx, user):
       """Find out how much pp someone has in osu!"""
-      url = 'https://osu.ppy.sh/api/get_user?k=KEY_HERE&u='+user
+      tokens = json.load(open("tokens.json"))
+      
+      url = 'https://osu.ppy.sh/api/get_user?k='+tokens["osu"]+'&u='+user
       url_get = requests.get(url)
       data = url_get.json()
       formattedMes=""
