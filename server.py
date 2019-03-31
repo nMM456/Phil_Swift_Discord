@@ -85,6 +85,8 @@ async def background_task():
 
 async def gameVoice():
     await bot.wait_until_ready()
+    channel1 = bot.get_channel(562013063931232272)
+    channel2 = bot.get_channel(562013071304818693)
     while(not bot.is_closed()):
         try:
             url = 'https://api.overwatchleague.com/live-match'
@@ -106,7 +108,7 @@ async def gameVoice():
                 for i in range(len(data["data"]["stages"][x]["matches"])):
                     if data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000 > current:
                         gametime = data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000
-                        atime = time.strftime('%Y-%m-%d %I:%M:%S', time.localtime(gametime-18000))
+                        atime = time.strftime('%m-%d-%Y %I:%M:%S', time.localtime(gametime+28800))
                         team1 = data["data"]["stages"][x]["matches"][i]["competitors"][0]["abbreviatedName"]
                         team2 = data["data"]["stages"][x]["matches"][i]["competitors"][1]["abbreviatedName"]
                         if not(channel1.name == team1 and channel2.name == atime):
