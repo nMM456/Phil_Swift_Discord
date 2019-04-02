@@ -81,6 +81,7 @@ class Misc(commands.Cog):
     async def JAKE(self, ctx):
         """JAKE IS MAD BECAUSE HE IS BAD"""
         await ctx.send('J <:LUL:421063402094329858> K E')
+        
     @commands.command()
     async def kanye(self, ctx):
         """Thank you Kanye, very cool!"""
@@ -88,9 +89,16 @@ class Misc(commands.Cog):
         url_get = requests.get(url)
         data = url_get.json()
         await ctx.send('"'+data["quote"]+'"')
+        
     @commands.command()
     async def getServerID(self, ctx):
-        ctx.send(ctx.guild.id)         
+        """Get ID of current server"""
+        await ctx.send(ctx.guild.id)
+    
+    @commands.command()
+    async def getUserID(self, ctx):
+        """Get ID of yourself."""
+        await ctx.send(ctx.author.id)
     
 #Not part of class:
 def setup(bot):
