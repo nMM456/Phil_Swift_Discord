@@ -8,6 +8,7 @@ import os
 import json
 import requests
 import time
+from test._test_multiprocessing import exception_throwing_generator
 
 def get_prefix(bot, message):
     '''A callable Prefix for our bot. This could be edited to allow per server prefixes.'''
@@ -97,9 +98,11 @@ async def gameVoice():
             score1 = str(data["data"]["liveMatch"]["scores"][0]["value"])
             score2 = str(data["data"]["liveMatch"]["scores"][1]["value"])
             if not(channel1.name == team1+": "+str(score1) and channel2.name == team2+": "+str(score2)):
-                if ((data["data"]["liveMatch"]["startDateTS"]/1000)<int(time.time())):
+                if data["data"]["liveMatch"]["liveStatus"] != "UPCOMING":
                     await channel1.edit(name=team1+": "+str(score1))
                     await channel2.edit(name=team2+": "+str(score2))
+                else:
+                    raise ValueError('A very specific bad thing happened.(THIS IS A PLACEHOLDER IF I FEEL LIKE FIXING IT.')
         except:
             url = 'https://api.overwatchleague.com/schedule'
             url_get = requests.get(url)
@@ -110,7 +113,7 @@ async def gameVoice():
                 for i in range(len(data["data"]["stages"][x]["matches"])):
                     if data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000 > current:
                         gametime = data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000
-                        atime = time.strftime('%m-%d-%Y %I:%M:%S', time.localtime(time.time()+data["data"]["liveMatch"]["timeToMatch"])
+                        atime = time.strftime('%m-%d-%Y %I:%M:%S', time.localtime(gametime+28800))
                         team1 = data["data"]["stages"][x]["matches"][i]["competitors"][0]["abbreviatedName"]
                         team2 = data["data"]["stages"][x]["matches"][i]["competitors"][1]["abbreviatedName"]
                         if not(channel1.name == team1 and channel2.name == atime):
