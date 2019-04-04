@@ -96,8 +96,10 @@ async def gameVoice():
             team2 = data["data"]["liveMatch"]["competitors"][1]["abbreviatedName"]
             score1 = str(data["data"]["liveMatch"]["scores"][0]["value"])
             score2 = str(data["data"]["liveMatch"]["scores"][1]["value"])
-            await channel1.edit(name=team1+": "+str(score1))
-            await channel2.edit(name=team2+": "+str(score2))
+            if not(channel1.name == team1+": "+str(score1) and channel2.name == team2+": "+str(score2)):
+                if ((data["data"]["liveMatch"]["startDateTS"]/1000)<int(time.time())):
+                    await channel1.edit(name=team1+": "+str(score1))
+                    await channel2.edit(name=team2+": "+str(score2))
         except:
             url = 'https://api.overwatchleague.com/schedule'
             url_get = requests.get(url)
@@ -108,7 +110,7 @@ async def gameVoice():
                 for i in range(len(data["data"]["stages"][x]["matches"])):
                     if data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000 > current:
                         gametime = data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000
-                        atime = time.strftime('%m-%d-%Y %I:%M:%S', time.localtime(gametime+28800))
+                        atime = time.strftime('%m-%d-%Y %I:%M:%S', time.localtime(time.time()+data["data"]["liveMatch"]["timeToMatch"])
                         team1 = data["data"]["stages"][x]["matches"][i]["competitors"][0]["abbreviatedName"]
                         team2 = data["data"]["stages"][x]["matches"][i]["competitors"][1]["abbreviatedName"]
                         if not(channel1.name == team1 and channel2.name == atime):
