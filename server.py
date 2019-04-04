@@ -101,8 +101,7 @@ async def gameVoice():
                 if data["data"]["liveMatch"]["liveStatus"] != "UPCOMING":
                     await channel1.edit(name=team1+": "+str(score1))
                     await channel2.edit(name=team2+": "+str(score2))
-                else:
-                    raise ValueError('A very specific bad thing happened.(THIS IS A PLACEHOLDER IF I FEEL LIKE FIXING IT.')
+                    
         except:
             url = 'https://api.overwatchleague.com/schedule'
             url_get = requests.get(url)
