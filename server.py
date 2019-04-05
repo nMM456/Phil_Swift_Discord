@@ -92,15 +92,7 @@ async def gameVoice():
             url = 'https://api.overwatchleague.com/live-match'
             url_get = requests.get(url)
             data = url_get.json()
-            if data["data"]["liveMatch"]["liveStatus"] != "UPCOMING":
-                team1 = data["data"]["liveMatch"]["competitors"][0]["abbreviatedName"]
-                team2 = data["data"]["liveMatch"]["competitors"][1]["abbreviatedName"]
-                score1 = str(data["data"]["liveMatch"]["scores"][0]["value"])
-                score2 = str(data["data"]["liveMatch"]["scores"][1]["value"])
-                if not(channel1.name == team1+": "+str(score1) and channel2.name == team2+": "+str(score2)):
-                    await channel1.edit(name=team1+": "+str(score1))
-                    await channel2.edit(name=team2+": "+str(score2))
-            else:
+            if data["data"]["liveMatch"]["liveStatus"] == "UPCOMING":
                 url = 'https://api.overwatchleague.com/schedule'
                 url_get = requests.get(url)
                 data = url_get.json()
@@ -120,6 +112,17 @@ async def gameVoice():
                             break
                     if found:
                         break
+            else:
+                url = 'https://api.overwatchleague.com/live-match'
+                url_get = requests.get(url)
+                data = url_get.json()
+                team1 = data["data"]["liveMatch"]["competitors"][0]["abbreviatedName"]
+                team2 = data["data"]["liveMatch"]["competitors"][1]["abbreviatedName"]
+                score1 = str(data["data"]["liveMatch"]["scores"][0]["value"])
+                score2 = str(data["data"]["liveMatch"]["scores"][1]["value"])
+                if not(channel1.name == team1+": "+str(score1) and channel2.name == team2+": "+str(score2)):
+                    await channel1.edit(name=team1+": "+str(score1))
+                    await channel2.edit(name=team2+": "+str(score2))
             await asyncio.sleep(300)
 
 
