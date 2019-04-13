@@ -30,7 +30,6 @@ class OWL(commands.Cog):
 
     @commands.command()
     async def currentgame(self, ctx):
-        
         """Returns the current Overwatch League score"""
         try:
             url = 'https://api.overwatchleague.com/live-match'
@@ -60,8 +59,9 @@ class OWL(commands.Cog):
         for x in range(len(data["data"])):
           if data["data"][x]["name"].lower() == player.lower():
             niceName=data["data"][x]["name"]
+          else:
+            break
         formattedMes = " "
-        
         for x in range(len(data["data"])):
           if data["data"][x]["name"].lower() == player.lower():
             for y in data["data"][x]:
