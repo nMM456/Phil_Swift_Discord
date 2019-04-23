@@ -10,15 +10,39 @@ class Emotes(commands.Cog):
         self.bot = bot
     #commands for this module go here, in this class
     @commands.command()
+    async def emotes(self, ctx):
+        """List of ASCII emotes."""
+        data = json.load(open("Emotes.json"))
+        message="```\n"
+        for i in data:
+            message+=i+"\n"
+        message+="```"
+        await ctx.send(message)
+        
+    @commands.command()
     async def showemote(self, ctx, emote):
         """Shows ASCII art based off of the following parameter."""
-        f = open("r", "Emotes.json")
-        data = json.loads(f)
+        data = json.load(open("Emotes.json"))
         try:
             await ctx.send(data[emote])
         except:
-            await ctx.send("Emote '"+emote+"' does not exist.")
-        
+            await ctx.send(emote+" does not exist.")
+        await ctx.message.delete()
+    
+    @commands.command()
+    async def addEmote(self, ctx, name, *emote):
+        """Add emote to JSON file."""
+        f = open("Emotes.json")
+        data=json.load(open("Emotes.json"))
+        for i in data:
+            if i = name:
+                await ctx.send("Name taken.")
+            else:
+                newEmote={}
+                newEmote[name]=emote
+                f.write(json.dumps(data, newEmote))
+                await ctx.send(name+"has been added.")
+                
 #Not part of class:
 def setup(bot):
     bot.add_cog(Emotes(bot))

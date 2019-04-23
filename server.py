@@ -8,7 +8,6 @@ import os
 import json
 import requests
 import time
-from test._test_multiprocessing import exception_throwing_generator
 
 def get_prefix(bot, message):
     '''A callable Prefix for our bot. This could be edited to allow per server prefixes.'''
@@ -23,6 +22,7 @@ startup_extensions = ['modules.Misc', #Default extensions (all enabled)
                       'modules.Osu',
                       'modules.FlexSeal',
                       'modules.Weather',
+                      'modules.Emotes'
                       #continued
                     ]
 tokens = json.load(open("tokens.json"))
@@ -98,47 +98,31 @@ async def gameVoice():
                 data = url_get.json()
                 current = int(time.time())
                 found=False
-                try:
-                    for x in range(len(data["data"]["stages"])):        
-                        for i in range(len(data["data"]["stages"][x]["matches"])):
-                            if data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000 > current:
-                                gametime = data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000
-                                atime = time.strftime('%m-%d-%Y %I:%M:%S', time.localtime(gametime-18000))
-                                team1 = data["data"]["stages"][x]["matches"][i]["competitors"][0]["abbreviatedName"]
-                                team2 = data["data"]["stages"][x]["matches"][i]["competitors"][1]["abbreviatedName"]
-                                if not(channel1.name == team1 and channel2.name == atime):
-                                    await channel1.edit(name=team1+" VS. "+team2)
-                                    await channel2.edit(name=atime)
-                                found=True
-                                break
-                        if found:
+                for x in range(len(data["data"]["stages"])):        
+                    for i in range(len(data["data"]["stages"][x]["matches"])):
+                        if data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000 > current:
+                            gametime = data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000
+                            atime = time.strftime('%m-%d-%Y %I:%M:%S', time.localtime(gametime-14400))
+                            team1 = data["data"]["stages"][x]["matches"][i]["competitors"][0]["abbreviatedName"]
+                            team2 = data["data"]["stages"][x]["matches"][i]["competitors"][1]["abbreviatedName"]
+                            if not(channel1.name == team1 and channel2.name == atime):
+                                await channel1.edit(name=team1+" VS. "+team2)
+                                await channel2.edit(name=atime)
+                            found=True
                             break
-                        else:
-                            url = 'https://api.overwatchleague.com/live-match'
-                            url_get = requests.get(url)
-                            data = url_get.json()
-                            team1 = data["data"]["liveMatch"]["competitors"][0]["abbreviatedName"]
-                            team2 = data["data"]["liveMatch"]["competitors"][1]["abbreviatedName"]
-                            score1 = str(data["data"]["liveMatch"]["scores"][0]["value"])
-                            score2 = str(data["data"]["liveMatch"]["scores"][1]["value"])
-                            if not(channel1.name == team1+": "+str(score1) and channel2.name == team2+": "+str(score2)):
-                                await channel1.edit(name=team1+": "+str(score1))
-                                await channel2.edit(name=team2+": "+str(score2))
-                except:
-                    for x in range(len(data["data"]["stages"])):        
-                        for i in range(len(data["data"]["stages"][x]["matches"])):
-                            if data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000 > current:
-                                gametime = data["data"]["stages"][x]["matches"][i]["startDateTS"]/1000
-                                atime = time.strftime('%m-%d-%Y %I:%M:%S', time.localtime(gametime-18000))
-                                team1 = data["data"]["stages"][x]["matches"][i]["competitors"][0]["abbreviatedName"]
-                                team2 = data["data"]["stages"][x]["matches"][i]["competitors"][1]["abbreviatedName"]
-                                if not(channel1.name == team1 and channel2.name == atime):
-                                    await channel1.edit(name=team1+" VS. "+team2)
-                                    await channel2.edit(name=atime)
-                                found=True
-                                break
-                        if found:
-                            break
+                    if found:
+                        break
+            else:
+                url = 'https://api.overwatchleague.com/live-match'
+                url_get = requests.get(url)
+                data = url_get.json()
+                team1 = data["data"]["liveMatch"]["competitors"][0]["abbreviatedName"]
+                team2 = data["data"]["liveMatch"]["competitors"][1]["abbreviatedName"]
+                score1 = str(data["data"]["liveMatch"]["scores"][0]["value"])
+                score2 = str(data["data"]["liveMatch"]["scores"][1]["value"])
+                if not(channel1.name == team1+": "+str(score1) and channel2.name == team2+": "+str(score2)):
+                    await channel1.edit(name=team1+": "+str(score1))
+                    await channel2.edit(name=team2+": "+str(score2))
             await asyncio.sleep(300)
 
 
