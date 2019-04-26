@@ -15,4 +15,4 @@ Current general commands are:
   
   - Other useless basic commands that are to irrelevant to list off as of now.
 
-After inputting your API key in server.py, run server.py and the bot should run. The osu! command will also need an api key to function!
+Add your keys to tokens.json to properly run the bot.
