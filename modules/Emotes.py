@@ -28,20 +28,6 @@ class Emotes(commands.Cog):
         except:
             await ctx.send(emote+" does not exist.")
         await ctx.message.delete()
-    
-    @commands.command()
-    async def addEmote(self, ctx, name, *emote):
-        """Add emote to JSON file."""
-        f = open("Emotes.json")
-        data=json.load(open("Emotes.json"))
-        for i in data:
-            if i = name:
-                await ctx.send("Name taken.")
-            else:
-                newEmote={}
-                newEmote[name]=emote
-                f.write(json.dumps(data, newEmote))
-                await ctx.send(name+"has been added.")
                 
 #Not part of class:
 def setup(bot):
