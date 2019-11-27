@@ -20,15 +20,16 @@ class Emotes(commands.Cog):
         await ctx.send(message)
         
     @commands.command()
+    @commands.cooldown(1, 1, commands.BucketType.user)
     async def showemote(self, ctx, emote):
         """Shows ASCII art based off of the following parameter."""
         data = json.load(open("Emotes.json"))
         try:
             await ctx.send(data[emote])
         except:
-            await ctx.send(emote+" does not exist.")
+            await ctx.send("``"+emote+" does not exist.``  ")
         await ctx.message.delete()
-                
+    
 #Not part of class:
 def setup(bot):
     bot.add_cog(Emotes(bot))
