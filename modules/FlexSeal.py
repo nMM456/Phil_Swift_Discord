@@ -12,8 +12,8 @@ class FlexSeal(commands.Cog):
         """Find out about Flex Tape!"""
         urllib.request.urlretrieve("https://cdn.glitch.com/74e2ec8d-3eb3-4996-9ac4-655fca6e9f6a%2Fphil.txt?1540241809798", "phil.txt")
         quote = open("phil.txt","r")
-        await ctx.message.delete()
         await ctx.send(quote.read())
+        await ctx.message.delete()
         quote.close()
 
 #Not part of class:

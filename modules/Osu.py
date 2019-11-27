@@ -3,6 +3,7 @@ from discord.ext import commands
 import asyncio
 import urllib.request
 import requests
+import json
 
 class Osu(commands.Cog):
     def __init__(self, bot):
@@ -12,7 +13,6 @@ class Osu(commands.Cog):
     async def osustats(self, ctx, user):
       """Find out how much pp someone has in osu!"""
       tokens = json.load(open("tokens.json"))
-      
       url = 'https://osu.ppy.sh/api/get_user?k='+tokens["osu"]+'&u='+user
       url_get = requests.get(url)
       data = url_get.json()

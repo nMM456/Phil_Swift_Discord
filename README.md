@@ -1,18 +1,27 @@
-# Phil Swift Discord
-My discord bot Phil Swift which has very little support for statistic in OWL
+Welcome to the Glitch BETA
+==========================
 
-If you decide to run the bot, you can see all available commands by using !help
+Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
 
-The primary reason for this bot is to find statistic about the Overwatch League. I also added other features that were important to me or other people in my server such as osu! I hope to add more features to my bot in the future. 
+**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
 
-Current general commands are:
+Find out more [about Glitch](https://glitch.com/about).
 
-  - Minimal Overwatch League support
-  
-  - osu! statistics
-  
-  - US Weather support(I plan to add on to this)
-  
-  - Other useless basic commands that are to irrelevant to list off as of now.
 
-Add your keys to tokens.json to properly run the bot.
+Your Project
+------------
+
+On the front-end,
+- edit `public/client.js`, `public/style.css` and `views/index.html`
+- drag in `assets`, like images or music, to add them to your project
+
+On the back-end,
+- your app starts at `server.js`
+- add frameworks and packages in `package.json`
+- safely store app secrets in `.env` (nobody can see this but you and people you invite)
+
+
+Made by [Fog Creek](https://fogcreek.com/)
+-------------------
+
+\ ゜o゜)ノ
