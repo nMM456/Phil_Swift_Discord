@@ -99,6 +99,15 @@ class Misc(commands.Cog):
     async def getServerID(self, ctx):
         await ctx.send(str(ctx.guild.id))
     
+    @commands.command()
+    async def ningify(ctx, url):
+        ning = Image.open("ning.jpg")
+        urllib.request.urlretrieve(url, f"AddMeme")
+        meme = Image.open(f'AddMeme').convert('RGBA').resize((233,139))
+        ning.paste(meme, (105,0), meme)
+        ning.save('ninged.png','png')
+        await ctx.send(file=discord.File('ninged.png', filename='ninged.png'))
+        
 #Not part of class:
 def setup(bot):
     bot.add_cog(Misc(bot))
